@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        tools:context=".new_service" />
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_marginTop="300dp"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Agregar Servicio"
+                android:background="@color/colorPrimaryDark"
+                android:layout_marginBottom="10dp"
+                android:padding="5dp"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+
+
+            <EditText
+                android:id="@+id/service_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:textColorHint="@color/colorPrimary"
+                android:textColor="@color/colorPrimaryDark"
+                android:hint="Nombre del Servicio"
+                android:inputType="textPersonName"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:src="@drawable/ic_phone_solid" />
+
+                <EditText
+                    android:id="@+id/phone_field"
+                    android:layout_width="wrap_content"
+                    android:layout_weight=".8"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:hint="Numero a 10 digitos"
+                    android:inputType="phone"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/phone_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Telefono"
+                    android:textAlignment="textEnd"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:src="@drawable/ic_envelope_solid" />
+
+                <EditText
+                    android:id="@+id/email_field"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:ems="10"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:hint="example@example.com"
+                    android:inputType="textPersonName"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/email_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Email"
+                    android:textAlignment="textEnd"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:src="@drawable/ic_whatsapp_square_brands" />
+
+                <EditText
+                    android:id="@+id/wa_field"
+                    android:layout_width="wrap_content"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_weight=".8"
+                    android:inputType="phone"
+                    android:hint="Numero a 10 digitos"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/wa_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:text="WhatsApp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAlignment="textEnd"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="105dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="87dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="195dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView16"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=" Horario"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/start_hour_field"
+                                android:layout_width="95dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="time"
+                                android:hint="10:00"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/end_hour_field"
+                                android:layout_width="95dp"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_height="wrap_content"
+                                android:hint="18:00"
+                                android:layout_weight="1"
+                                android:ems="10"
+                                android:inputType="time"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="197dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="  Categoria"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="14sp" />
+
+                        <Spinner
+                            android:id="@+id/spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/categories_array"
+                            android:spinnerMode="dropdown" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/editText8"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="WhatsApp"
+                    android:textAlignment="textEnd" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/roundedbutton"
+                android:text="@string/agregar_locacion" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>
+

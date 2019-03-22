@@ -7,12 +7,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editText9"
-        android:layout_width="378dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"/>
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </SearchView>
 
 
     <android.support.v7.widget.RecyclerView

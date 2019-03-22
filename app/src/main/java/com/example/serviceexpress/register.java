@@ -84,7 +84,7 @@ public class register extends AppCompatActivity {
     }
 
     public void initProfile(){
-        Intent intent = new Intent(this, ProfileUser.class);
+        Intent intent = new Intent(this, user_profile.class);
         startActivity(intent);
         finish();
     }

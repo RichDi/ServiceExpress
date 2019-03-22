@@ -45,9 +45,12 @@ public class fragment_servicios extends Fragment{
 
         recyclerView.setAdapter(mAdapter);
 
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                lista.clear();
 
                 for (DataSnapshot service : dataSnapshot.getChildren()){
                     lista.add(service.getValue(Servicios.class));
@@ -55,7 +58,6 @@ public class fragment_servicios extends Fragment{
 
                 Log.d("DataSnapshot",lista.toString());
                 mAdapter.notifyDataSetChanged();
-
             }
 
             @Override

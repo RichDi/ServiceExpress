@@ -1,7 +1,5 @@
 package com.example.serviceexpress;
 
-import com.google.android.gms.maps.model.LatLng;
-
 public class Servicios {
 
     public LatLng_FB ubicacion;
@@ -14,12 +12,12 @@ public class Servicios {
     public String categoria;
     public String userID;
     public String creationDate;
-    public String no_servicios;
+    public int no_servicios;
 
     public Servicios() {
     }
 
-    public Servicios(LatLng_FB ubicacion, String nombre, String telefono, String email, String whatsapp, String hora_apertura, String hora_clausura, String categoria, String userID, String creationDate, String no_servicios) {
+    public Servicios(LatLng_FB ubicacion, String nombre, String telefono, String email, String whatsapp, String hora_apertura, String hora_clausura, String categoria, String userID, String creationDate, int no_servicios) {
         this.ubicacion = ubicacion;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -113,11 +111,11 @@ public class Servicios {
         this.creationDate = creationDate;
     }
 
-    public String getNo_servicios() {
+    public int getNo_servicios() {
         return no_servicios;
     }
 
-    public void setNo_servicios(String no_servicios) {
+    public void setNo_servicios(int no_servicios) {
         this.no_servicios = no_servicios;
     }
 }

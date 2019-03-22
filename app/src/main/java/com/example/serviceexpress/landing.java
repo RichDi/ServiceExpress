@@ -66,6 +66,9 @@ public class landing extends AppCompatActivity {
 
     }
 
+
+
+
     public void initLogin(){
         Intent intent = new Intent(this, login.class);
         startActivity(intent);

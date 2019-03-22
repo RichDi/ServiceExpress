@@ -1,81 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:id="@+id/mi_servicio"
-    android:background="@color/grey"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    android:orientation="vertical"
+    tools:context=".service_detail">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        android:layout_height="wrap_content"
-        android:layout_weight="16"
-        android:layout_width="match_parent">
-
-
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:map="http://schemas.android.com/apk/res-auto"
-            android:name="com.google.android.gms.maps.MapFragment"
-            android:id="@+id/map_static"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            map:cameraZoom="13"
-            map:mapType="normal"
-            map:liteMode="true"/>
-
-        <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="wrap_content"
-            android:layout_height="39dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/white_rounded_corners"
-            android:gravity="center"
-            android:padding="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_whatsapp_square_brands" />
-
-            <TextView
-                android:id="@+id/field_service_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Mi Servicio" />
-
-        </LinearLayout>
+        android:layout_weight="2"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp">
 
     </android.support.constraint.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_weight="8"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:background="@drawable/white_rounded_corners"
         android:orientation="vertical"
         android:padding="10dp">
 
-        <TextView
-            android:id="@+id/field_service_no_services"
+        <RatingBar
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/white_rounded_corners"
-            android:text="Servicios Completados: 10"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20dp" />
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -146,6 +97,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:gravity="center"
                 android:padding="10dp">
 
@@ -174,6 +126,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:gravity="center"
                 android:padding="10dp">
 
@@ -202,6 +155,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:gravity="center"
                 android:padding="10dp">
 
@@ -234,4 +188,3 @@
 
 
 </LinearLayout>
-

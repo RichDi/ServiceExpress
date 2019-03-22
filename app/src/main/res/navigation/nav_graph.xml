@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/landing">
+
+    <activity
+        android:id="@+id/landing"
+        android:name="com.example.serviceexpress.landing"
+        android:label="landing"
+        tools:layout="@layout/landing" />
+    <activity
+        android:id="@+id/register"
+        android:name="com.example.serviceexpress.register"
+        android:label="register"
+        tools:layout="@layout/register" />
+    <activity
+        android:id="@+id/login"
+        tools:layout="@layout/login"
+        android:name="com.example.serviceexpress.login"
+        android:label="login" />
+    <activity
+        android:id="@+id/user_profile"
+        android:name="com.example.serviceexpress.user_profile"
+        android:label="activity_user_profile"
+        tools:layout="@layout/activity_user_profile" />
+    <fragment
+        android:id="@+id/navHost"
+        android:name="com.example.serviceexpress.navHost"
+        android:label="fragment_nav_host"
+        tools:layout="@layout/fragment_nav_host" />
+</navigation>

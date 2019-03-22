@@ -2,61 +2,69 @@ package com.example.serviceexpress;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.service.autofill.RegexValidator;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
+
+
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.common.collect.Range;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
-import javax.xml.transform.Templates;
-
-public class new_service extends FragmentActivity implements OnMapReadyCallback {
+public class new_service extends FragmentActivity implements OnMapReadyCallback, OnMyLocationButtonClickListener, OnMyLocationClickListener {
 
     private GoogleMap mMap;
     private DatabaseReference mDatabase;
     private FirebaseUser currentFirebaseUser;
     private LatLng currentMarker = null;
     private AwesomeValidation awesomeValidation;
+    private TextView service_address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_services);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        service_address = findViewById(R.id.field_address);
 
         final TextView service_name = findViewById(R.id.service_field);
         final TextView service_telefone = findViewById(R.id.phone_field);
@@ -101,7 +109,7 @@ public class new_service extends FragmentActivity implements OnMapReadyCallback 
                                         String shortTime = DateFormat.getDateInstance(DateFormat.SHORT).format(currentTime);
 
                                         Servicios new_service = new Servicios();
-                                        LatLng_FB customlocation = new LatLng_FB(currentMarker.latitude,currentMarker.longitude);
+                                        LatLng_FB customlocation = new LatLng_FB(currentMarker.latitude,currentMarker.longitude,service_address.getText().toString());
                                         new_service.setUbicacion(customlocation);
                                         new_service.setNombre(service_name.getText().toString());
                                         new_service.setTelefono(service_telefone.getText().toString());
@@ -112,7 +120,12 @@ public class new_service extends FragmentActivity implements OnMapReadyCallback 
                                         new_service.setCategoria(service_categoria.getSelectedItem().toString());
                                         new_service.setUserID(currentFirebaseUser.getUid());
                                         new_service.setCreationDate(shortTime);
+                                        new_service.setNo_servicios(0);
                                         mDatabase.child("servicio").push().setValue(new_service);
+
+                                        Intent intent = new Intent(new_service.this, user_profile.class);
+                                        startActivity(intent);
+                                        finish();
                                     }
                                 });
                         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -127,7 +140,7 @@ public class new_service extends FragmentActivity implements OnMapReadyCallback 
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(new_service.this);
                         builder.setCancelable(true);
-                        builder.setTitle("Confirma tus Datos");
+                        builder.setTitle("Informacion incompleta");
                         builder.setMessage("No has seleccionado tu ubicacion");
                         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
@@ -145,6 +158,25 @@ public class new_service extends FragmentActivity implements OnMapReadyCallback 
             }
         });
 
+
+    }
+
+    private void getAddress(LatLng position){
+
+        Geocoder geoCoder = new Geocoder(this);
+        List<Address> matches = null;
+        try {
+            matches = geoCoder.getFromLocation(position.latitude, position.longitude, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Address bestMatch = (matches.isEmpty() ? null : matches.get(0));
+
+        Log.d("Direccion",bestMatch.toString());
+
+        String calle = bestMatch.getAddressLine(0);
+
+        service_address.setText(calle);
 
     }
 
@@ -170,8 +202,30 @@ public class new_service extends FragmentActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng Mexico = new LatLng(19.42847, -99.12766);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(Mexico));
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {mMap.setMyLocationEnabled(true);
+            setUpMap();
+        } else {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 1) {
+            if (permissions.length == 1 &&
+                    permissions[0] == Manifest.permission.ACCESS_FINE_LOCATION &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                setUpMap();
+            } else {
+                // Permission was denied. Display an error message.
+            }
+        }
+    }
+
+    private void setUpMap() {
+        mMap.setMyLocationEnabled(true);
         mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
@@ -187,17 +241,26 @@ public class new_service extends FragmentActivity implements OnMapReadyCallback 
                 // This will be displayed on taping the marker
                 markerOptions.title(latLng.latitude + " : " + latLng.longitude);
                 // Clears the previously touched position
+                getAddress(latLng);
                 mMap.clear();
                 // Animating to the touched position
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 // Placing a marker on the touched position
                 mMap.addMarker(markerOptions);
                 mMap.getUiSettings().setMapToolbarEnabled(true);
+
             }
         });
-
-
     }
 
 
+    @Override
+    public boolean onMyLocationButtonClick() {
+        return false;
+    }
+
+    @Override
+    public void onMyLocationClick(@NonNull Location location) {
+
+    }
 }
